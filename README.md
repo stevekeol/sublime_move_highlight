@@ -9,3 +9,13 @@ A syntax highlight extension of Move language in sublime for linux
 
 
 ## How to develop
+
+1. Install `PackageDev`
+
+2. Tools - Packages - Package Development - New Syntax Definition
+
+3. Edit the auto generated `.sublime-syntax`
+
+```yaml title=".sublime-syntax"
+
+```
