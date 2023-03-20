@@ -39,6 +39,7 @@ contexts:
     - include: move_features
     - include: move_types
     - include: move_others
+    - include: move_inner_functions
     - include: keywords
     - include: numbers
     - include: strings
@@ -83,6 +84,12 @@ contexts:
     # Key: self &self Self
     - match: '\b(&self|self|Self)\b'
       scope: constant.character.escape.move
+
+  move_inner_functions:
+    # Color: Green
+    # Key: move_to assert! exists ...
+    - match: '\b(move_to|assert!|exists)\b'
+      scope: constant.numeric.move      
 
   keywords:
     # Red
@@ -132,6 +139,7 @@ const let fun struct
 # 绿色
 struct_name 
 fun_name
+内置函数：move_to assert! !exists
 
 # 红色 -ok
 use &  if public friend module has
@@ -147,7 +155,6 @@ use &  if public friend module has
 
 # 特性/内置函数 紫色
 key, store, drop, entry
-内置函数：move_to assert! !exists
 
 # 类型 橘色
 <xxx T>
