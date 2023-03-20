@@ -38,6 +38,7 @@ contexts:
     - include: move_definitions
     - include: move_features
     - include: move_types
+    - include: move_others
     - include: keywords
     - include: numbers
     - include: strings
@@ -55,13 +56,13 @@ contexts:
   move_keyworks:
     # Color: Red
     # Key: use & public friend module has
-    - match: '\b(use|&|public|friend|module|has)\b'
+    - match: '\b(use|mut|&|public|friend|module|has|script)\b'
       scope: keyword.context.move
 
   move_definitions:
     # Color: Blue
     # Key: const let fun struct
-    - match: '\b(const|let|fun|struct)\b'
+    - match: '\b(const|let|fun|struct|acquires)\b'
       scope: keyword.declaration.move # variable.annotation.move ?
 
   move_features:
@@ -74,8 +75,14 @@ contexts:
   move_types:
     # Color: Orange
     # Key: u8 u16 u32 u64 u128 u256
-    - match: '\b(&|u8|u16|u32|u64|u128|u256|address|&signer|vector)\b'
+    - match: '\b(bool|&|u8|u16|u32|u64|u128|u256|address|&signer|vector|signer|true|false)\b'
       scope: constant.numeric.move
+
+  move_others:
+    # Color: Orange
+    # Key: self &self Self
+    - match: '\b(&self|self|Self)\b'
+      scope: constant.character.escape.move
 
   keywords:
     # Red
@@ -112,6 +119,7 @@ contexts:
         - meta_scope: comment.line.double-slash.move
         - match: $\n?
           pop: true
+
 ```
 
 > Location: `/home/stevekeol/.config/sublime-text-3/Packages/User/Move.sublime-syntax`
