@@ -114,7 +114,7 @@ contexts:
           pop: true
 ```
 
-> Location: `/home/stevekeol/.config/sublime-text-3/Packages/PackageDev/Package/Sublime Text Syntax Definition/Sublime Text Syntax Definition.sublime-syntax`
+> Location: `/home/stevekeol/.config/sublime-text-3/Packages/User/Move.sublime-syntax`
 
 ## Memo
 ```yaml title="配色设计草案"
