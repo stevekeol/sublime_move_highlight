@@ -88,7 +88,7 @@ contexts:
   move_inner_functions:
     # Color: Green
     # Key: move_to assert! exists ...
-    - match: '\b(move_to|assert!|exists)\b'
+    - match: '\b(move_to|move_from|assert!|exists|borrow_global|borrow_global_mut|)\b'
       scope: constant.numeric.move      
 
   keywords:
