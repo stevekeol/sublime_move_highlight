@@ -57,7 +57,7 @@ contexts:
   move_keyworks:
     # Color: Red
     # Key: use & public friend module has
-    - match: '\b(use|mut|&|public|friend|module|has|script)\b'
+    - match: '\b(use|mut|&|public|friend|module|has|script|native)\b'
       scope: keyword.context.move
 
   move_definitions:
