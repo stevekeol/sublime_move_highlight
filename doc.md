@@ -62,7 +62,7 @@ meta_append：一个布尔值，在继承过程中控制上下文名称冲突的
 - push：要压入当前栈的新的上下文（一个或多个或匿名）
 - pop：从栈中弹出一个context（给定正整数的话，可以弹出多个context）（可以和push, set, embed, branch组合使用，将在其它action执行之前弹出context）
 - set：类似push，但是会先弹出一个context；
-- embed：类似push，但遇到escape模式就会跳出任意数量的嵌套context中跳出来（很适合：在一个syntax中嵌入另一个syntax的场景）
+- embed：类似push，但遇到escape模式就会跳出任意数量的嵌套context中跳e出来（很适合：在一个syntax中嵌入另一个syntax的场景）
 	- escape: 必须配套embed，用以跳出embed的context
 	- embed_scope：该scope会分配给match后escape前的所有文本
 	- escape_captures：一个capture组到scope名字的映射，对于escape模式。使用capture group 0来将scope应用到整个escape匹配。
@@ -86,24 +86,79 @@ meta_append：一个布尔值，在继承过程中控制上下文名称冲突的
     2: keyword.control.include.c++ # 匹配的include应用的scope
 ```
 
-```yaml title="将另一个context压入"
-- match: \b\w+(?=\() # 以变量为开头，后面是
+```yaml title="将另一个名叫function-parameters的context压入"
+- match: \b\w+(?=\() # 以变量为开头，后面只能是?=(中的一个。这个\是对(的转义字符！
   scope: entity.name.function.c++
   push: function-parameters # 压入处理函数参数的context
 ```
 
+```yaml title="弹出一个context"
+- match: \) # 当遇到一个)时，弹出该context
+  scope: punctuation.section.parens.end.c++
+  pop: true
+```
 
+```yaml title="用set弹出一个context并压入另一个"
+- match: \}
+  scope: punctuation.section.block.end.c++
+  set: file-global
+```
 
+```yaml title="嵌入另一个context"
+- match: (```)(js|javascript) # 
+  captures:
+    1: punctuation.section.code.begin.markdown
+    2: constant.other.markdown
+  embed: scope:source.js
+  embed_scope: meta.embedded.js.markdown
+  escape: ^```
+  escape_captures:
+    0: punctuation.section.code.end.markdown
+```
 
+```yaml title="branch尝试一个高亮分支，不成的话切换为另一个"
+expression:
+  - match: (?=\()
+    branch_point: open_parens
+    branch:
+      - paren_group
+      - arrow_function
 
+paren_group:
+  - match: \(
+    scope: punctuation.section.parens.begin.js
+    push:
+      - include: expressions
+      - match: \)
+        scope: punctuation.section.parens.begin.js
+        set:
+          - match: =>
+            fail: open_parens
+          - match: (?=\S)
+            pop: 2
 
+arrow_function:
+  - match: \(
+    scope: punctuation.section.parens.begin.js
+    push:
+      - match: \w+
+        scope: variable.parameter.js
+      - match: ','
+        scope: punctuation.separator.comma.js
+      - match: \)
+        scope: punctuation.section.parens.begin.js
+        set:
+          - match: =>
+            scope: storage.type.function.arrow.js
+            push: arrow_function_body
+```
 
+> [暂时不弄了！心累！](http://www.sublimetext.com/docs/syntax.html#inheritance)
 
+> 20230322暂停于此。
 
-
-
-
-
+TODO：
+- 泛型<T: drop + store> 希望的高亮：白色的<>之间，泛型参数T用橘色高亮，drop和store等abilities用紫色，运算符+用红色！
 
 
 ```yaml title="旧版-手写的样式"
