@@ -20,10 +20,10 @@ A syntax highlight extension of Move language in sublime for linux
 %YAML 1.2
 ---
 # See http://www.sublimetext.com/docs/3/syntax.html
-name: Move
+name: Move # 菜单中显示的名字
 file_extensions:
-  - move
-scope: source.move
+  - move # 文件扩展名；支持多个
+scope: source.move # 默认应用到所有文本的默认scope
 
 contexts:
   # The prototype context is prepended to all contexts but those setting
@@ -170,3 +170,25 @@ u8 u16 u32 u64 u128 u256
 ## References
 [官档](http://www.sublimetext.com/docs/syntax.html)
 [临时参考](https://www.jianshu.com/p/6c21df66be72)
+
+## Move借鉴Rust
+
+```yaml title="Move Highlight"
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+name: Move Hightlight
+file_extensions:
+  - move
+scope: source.move
+
+variables:
+  dec_literal: '[0-9](?:[0-9_])*' # 数字字面量
+  ## TODO
+
+contexts:
+  main:
+    - include: 
+```
+
+> <T: store + drop>
