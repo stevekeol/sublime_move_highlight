@@ -1533,6 +1533,10 @@ contexts:
     - match: \bfn\b
       scope: storage.type.function.move
 
+    # TODO: address
+    - match: \baddress\b
+      scope: storage.type.address.move
+
     - match: \bmodule\b
       scope: storage.type.module.move
 
