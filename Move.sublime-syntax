@@ -15,7 +15,7 @@ variables:
   lifetime: '''(?:_|{{non_raw_ident}})(?!\'')\b'
   escaped_byte: '\\([nrt0\"''\\]|x\h{2})'
   escaped_char: '\\([nrt0\"''\\]|x[0-7]\h|u\{(?:\h_*){1,6}\})'
-  int_suffixes: '[iu](?:8|16|32|64|128|size)' # 整数类型
+  int_suffixes: '[iu](?:8|16|32|64|128|256|size)' # 整数类型
   float_suffixes: 'f(32|64)' # 浮点数前缀
   dec_literal: '[0-9](?:[0-9_])*' # 数字
   float_exponent: '[eE][+-]?[0-9_]*[0-9][0-9_]*' # 自然指数

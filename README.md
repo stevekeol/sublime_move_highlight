@@ -191,4 +191,4 @@ contexts:
     - include: 
 ```
 
-> <T: store + drop>
+> `<T: store + drop>`
